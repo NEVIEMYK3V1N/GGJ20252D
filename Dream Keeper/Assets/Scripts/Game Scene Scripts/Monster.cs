@@ -15,8 +15,6 @@ public class Monster : MonoBehaviour
 
     private float startTime;
 
-    //public GameObject _gameManager; // TODO: unity, 挂在gamemanager上
-
     public float _speed = 0.02f;
     public float _moveCd = 0.02f;
 
@@ -60,7 +58,7 @@ public class Monster : MonoBehaviour
         GameManager gameManager = FindObjectOfType<GameManager>();
         if (gameManager != null)
         {
-            gameManager.endGame();
+            GameManager.Instance.setGameState(SceneType.End);
         }
     }
 

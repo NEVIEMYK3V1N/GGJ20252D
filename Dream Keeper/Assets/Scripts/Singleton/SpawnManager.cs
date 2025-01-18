@@ -28,8 +28,8 @@ public class SpawnConfigObj
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] public GameManager _gameManager;
-    [SerializeField] public MonsterManager _monsterManager;
+    //[SerializeField] public GameManager _gameManager;
+    //[SerializeField] public MonsterManager _monsterManager;
 
     [SerializeField] public GameObject _monsterPrefabs; // TODO: unity,
 
@@ -48,7 +48,17 @@ public class SpawnManager : MonoBehaviour
     public float size = 5.0f;
 
     private string _root_path = Environment.CurrentDirectory;
-    
+
+
+    // singleton
+    public static SpawnManager Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+        DontDestroyOnLoad(this.gameObject);
+    }
+
 
     // load config files
     public void Start()
@@ -83,8 +93,8 @@ public class SpawnManager : MonoBehaviour
             int amount_to_spawn = -1;
             for (int i = 0; i < _spawnLogics.Count; i++)
             {
-                if (this._gameManager.getScore() >= this._spawnLogics[i]._startPoint &&
-                    this._gameManager.getScore() <= this._spawnLogics[i]._endPoint)
+                if (GameManager.Instance.getScore() >= this._spawnLogics[i]._startPoint &&
+                    GameManager.Instance.getScore() <= this._spawnLogics[i]._endPoint)
                 {
                     amount_to_spawn = this._spawnLogics[i]._amountSpawning;
                     break;
@@ -134,7 +144,7 @@ public class SpawnManager : MonoBehaviour
         Transform spawn_point = this._spawnPoints[spawn_point_idx];
         newMonster.transform.position = spawn_point.position;
 
-        this._monsterManager.AddMonster(newMonster);
+        MonsterManager.Instance.AddMonster(newMonster);
 
         return newMonster;
     }

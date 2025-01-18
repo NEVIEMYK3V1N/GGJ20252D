@@ -8,6 +8,16 @@ public class MonsterManager : MonoBehaviour
 {
     public Dictionary<int, Queue<GameObject>> monsterQueues = new Dictionary<int, Queue<GameObject>>();
 
+    // singleton
+    public static MonsterManager Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+        DontDestroyOnLoad(this.gameObject);
+    }
+
+
     public void AddMonster(GameObject monster)
     {
         var colers = monster.GetComponent<Monster>()._colors;

@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class TutorialMonster : MonoBehaviour
 {
-    [SerializeField] GameManager _gameManager;
+    //[SerializeField] GameManager _gameManager;
 
     void Start()
     {
-        this._gameManager._spawnManager._monsterManager.AddMonster(this.gameObject);
+        MonsterManager.Instance.AddMonster(this.gameObject);
     }
 
     // Start is called before the first frame update
     private void OnDestroy()
     {
-        this._gameManager.startGame();
+        GameManager.Instance.setGameState(SceneType.Start);
     }
 }

@@ -6,18 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class SwitchSceneTo : MonoBehaviour
 {
-    [SerializeField] SceneType _sceneFrom;
     [SerializeField] SceneType _sceneTo;
 
     private void OnMouseDown()
     {
-        SwitchSceneTo.switchSceneTo(_sceneFrom, _sceneTo);
+        SwitchSceneTo.switchSceneTo(_sceneTo);
     }
 
-    public static void switchSceneTo(SceneType sceneFrom, SceneType sceneTo)
+    public static void switchSceneTo(SceneType sceneTo)
     {
-        //SceneManager.UnloadSceneAsync(Enum.GetName(typeof(SceneType), sceneFrom));
-
-        SceneManager.LoadScene(Enum.GetName(typeof(SceneType), sceneTo));
+        GameManager.Instance.setGameState(sceneTo);
     }
 }

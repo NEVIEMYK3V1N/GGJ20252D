@@ -644,8 +644,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530e4de2fda3f3645aa7ea61434957d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameManager: {fileID: 0}
-  _monsterManager: {fileID: 0}
   _monsterPrefabs: {fileID: 5688532681383949223, guid: 66c46b5c1921ba649aae6d0762d37495, type: 3}
   _spawnPoints:
   - {fileID: 2550745113443310385}
@@ -659,7 +657,7 @@ MonoBehaviour:
   - {fileID: 8222147918425263898}
   - {fileID: 3844201641421114600}
   - {fileID: 73687573230421212}
-  _availableMonstersFilePath: /Assets/Scripts/MonsterList.csv
-  _spawnLogicFilePath: /Assets/Scripts/SpawnSetting.csv
+  _availableMonstersFilePath: /Assets/Scripts/Singleton/MonsterList.csv
+  _spawnLogicFilePath: /Assets/Scripts/Singleton/SpawnSetting.csv
   _spawnCd: 1
   size: 5

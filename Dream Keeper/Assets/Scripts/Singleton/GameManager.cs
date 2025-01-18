@@ -7,6 +7,7 @@ using System.IO;
 using System.Globalization;
 using System.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum Color
 {
@@ -27,11 +28,23 @@ public enum SceneType
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] public SpawnManager _spawnManager;
+    // [SerializeField] public SpawnManager _spawnManager;
 
     // Static property for cross-scene score sharing
     private int _score;
     private SceneType _gameState = SceneType.Start;
+
+    // singleton
+    public static GameManager Instance;
+
+
+    private void Awake()
+    {
+        Instance = this;
+        DontDestroyOnLoad(this.gameObject);
+    }
+
+
 
     public void addScore(int score)
     {
@@ -43,6 +56,29 @@ public class GameManager : MonoBehaviour
         return this._score;
     }
 
+
+    public void setGameState(SceneType sceneTo)
+    {
+        this._gameState = sceneTo;
+        //SceneManager.UnloadSceneAsync(Enum.GetName(typeof(SceneType), sceneFrom));
+        SceneManager.LoadScene(Enum.GetName(typeof(SceneType), sceneTo));
+
+        if (sceneTo == SceneType.Start)
+        {
+            this.toStartMenu();
+        }
+        else if (sceneTo == SceneType.Game)
+        {
+            this.startGame();
+        }
+        else if (sceneTo == SceneType.End)
+        {
+            this.endGame();
+        }
+    }
+
+
+
     public void startGame()
     {
         if (this._gameState != SceneType.Start)
@@ -53,7 +89,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Started");
 
         this._score = 0;
-        this._spawnManager.startSpawning();
+        SpawnManager.Instance.startSpawning();
         this._gameState = SceneType.Game;
     }
 
@@ -67,13 +103,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Ended");
 
         this._gameState = SceneType.End;
-        this._spawnManager.stopSpawning();
-        this._spawnManager._monsterManager.ResetManager();
-
-        // change scene to end
-        SwitchSceneTo.switchSceneTo(SceneType.Game, SceneType.End);
+        SpawnManager.Instance.stopSpawning();
+        MonsterManager.Instance.ResetManager();
     }
-
 
     public void toStartMenu()
     {
@@ -83,7 +115,6 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log("To Start Menu");
-        this._gameState = SceneType.Start;
     }
 }
 

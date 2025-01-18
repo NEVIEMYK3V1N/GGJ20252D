@@ -9,8 +9,8 @@ public class Gun : MonoBehaviour
     private Color[] _colors = new Color[MAX_CAPACITY];
     private int _currentCapacity = 0;
 
-    [SerializeField] MonsterManager _monsterManager;
-    [SerializeField] GameManager _gameManager;
+    //[SerializeField] MonsterManager _monsterManager;
+    //[SerializeField] GameManager _gameManager;
 
     private void Start()
     {
@@ -49,15 +49,14 @@ public class Gun : MonoBehaviour
 
     public void shoot()
     {
-        Debug.Log("Shoot: " + this._monsterManager.GetEliminationCondition(this._colors));
+        Debug.Log("Shoot: " + MonsterManager.Instance.GetEliminationCondition(this._colors));
 
-        bool has_monster = this._monsterManager.HasMonster(this._colors);
+        bool has_monster = MonsterManager.Instance.HasMonster(this._colors);
         if (has_monster)
         {
             Debug.Log("gun has monster");
-            int score = this._monsterManager.DestroyMonster(this._colors);
-            //this._gameManager.addScore(score);
-            this._gameManager.addScore(score);
+            int score = MonsterManager.Instance.DestroyMonster(this._colors);
+            GameManager.Instance.addScore(score);
         }
         
         resetColors();
