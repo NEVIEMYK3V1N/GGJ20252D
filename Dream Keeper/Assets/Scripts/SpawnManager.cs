@@ -30,6 +30,10 @@ public class SpawnManager : MonoBehaviour
 
     public float size = 5.0f;
 
+
+    
+
+
     // TODO: unity, 按钮点击事件
     // 预期行为：随机从_availableMonsters中选取一个monster，实例化到左侧刷怪区的grid中
     public void Test_OnClick()

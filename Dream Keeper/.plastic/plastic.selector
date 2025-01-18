@@ -1,4 +1,0 @@
-repository "Dream Keeper@NEVIE_K3V1N@cloud"
-  path "/"
-    br "/main"
-    co "/main"
