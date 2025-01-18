@@ -16,7 +16,7 @@ public class SwitchSceneTo : MonoBehaviour
 
     public static void switchSceneTo(SceneType sceneFrom, SceneType sceneTo)
     {
-        SceneManager.UnloadSceneAsync(Enum.GetName(typeof(SceneType), sceneFrom));
+        //SceneManager.UnloadSceneAsync(Enum.GetName(typeof(SceneType), sceneFrom));
 
         SceneManager.LoadScene(Enum.GetName(typeof(SceneType), sceneTo));
     }
