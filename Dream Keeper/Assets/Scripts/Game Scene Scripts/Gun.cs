@@ -5,7 +5,12 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    const int MAX_CAPACITY = 4;
+    public const int MAX_CAPACITY = 4;
+
+
+    [SerializeField] public Magazine _magazine;
+
+    
     private Color[] _colors = new Color[MAX_CAPACITY];
     private int _currentCapacity = 0;
 
@@ -30,6 +35,8 @@ public class Gun : MonoBehaviour
         }
         
         this._colors[_currentCapacity] = color;
+        this._magazine.addToMagazine(_currentCapacity, color);
+        
         this._currentCapacity++;
 
         //debug_printColors();
@@ -61,6 +68,7 @@ public class Gun : MonoBehaviour
         {
             this._colors[i] = Color.EMPTY;
         }
+        this._magazine.resetMagazine();
     }
 
 
