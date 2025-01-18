@@ -63,3 +63,4 @@ crashlytics-build.properties
 # Ignore custom files
 *.private
 *.secret
+/Dream Keeper/Library
