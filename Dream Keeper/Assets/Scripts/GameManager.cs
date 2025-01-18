@@ -4,28 +4,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum Color
+{
+    Red,
+    Green,
+    Blue,
+    Yellow
+}
+
 public class GameManager : MonoBehaviour
 {
-    public static int _score = 0;
-
     // Static property for cross-scene score sharing
-    public static int Score
+    public int _score {get; set;}
+
+    public void addScore(int score)
     {
-        get { return _score; }
-        set { _score = value; }
+        this._score += score;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void startGame()
     {
         Debug.Log("Game Started");
@@ -41,7 +37,7 @@ public class GameManager : MonoBehaviour
     // TODO: unity 建一个新场景，期望点击按钮后，跳转到新场景，且新场景显示当前分数5
     public void Test_OnClick()
     {
-        GameManager.Score = 5;
+        this._score = 5;
         endGame();
     }
 }

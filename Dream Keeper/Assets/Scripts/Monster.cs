@@ -20,6 +20,7 @@ public class Monster : MonoBehaviour
     void Start()
     {
         startTime = Time.time; // 记录开始时间
+        Debug.Log("Monster " + _monsterName + " has been created");
         StartCoroutine(CheckSurvival()); // 启动协程来检查生存周期
     }
 
@@ -32,6 +33,13 @@ public class Monster : MonoBehaviour
         this._spriteRenderer.sprite = sprite;
     }
 
+    public void InitialMonster(String monsterName, Color[] colors, int score)
+    {
+        this._monsterName = monsterName;
+        this._colors = colors;
+        this._score = score;
+    }
+
     private IEnumerator CheckSurvival()
     {
         yield return new WaitForSeconds(timer); // 等待timer秒
@@ -42,7 +50,7 @@ public class Monster : MonoBehaviour
 
     public void OnGameOver()
     {
-        Debug.Log("Game Over: Not destroyed in time");
+        Debug.Log("Game Over: Monster " + _monsterName + " has been defeated in time");
 
         GameManager gameManager = FindObjectOfType<GameManager>();
         if (gameManager != null)
@@ -52,13 +60,7 @@ public class Monster : MonoBehaviour
     }
 }
 
-public enum Color
-{
-    Red,
-    Green,
-    Blue,
-    Yellow
-}
+
 
 
 

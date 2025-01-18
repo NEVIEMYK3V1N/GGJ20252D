@@ -7,36 +7,33 @@ using System.Globalization;
 using System.Text;
 using System.IO;
 using System;
+using System.Linq;
+
+public class MonsterObj
+{
+    public String _monsterName { get; set; }
+    public Color[] _colors { get; set; }
+    public int _score { get; set; }
+    public String _spritePath { get; set; }
+}
 
 public class SpawnManager : MonoBehaviour
 {
-    // [SerializeField]
-    // GameObject[] _spawnPoints; //刷怪点
 
-    [SerializeField]
-    public GameObject _monsterPrefabs; // TODO: unity,
+    [SerializeField] public GameObject _monsterPrefabs; // TODO: unity,
 
-    private List<MonsterObj> _availableMonsters;
+    [SerializeField] public Transform[] _spawnPoints;
 
-    public Transform SpawnGrid; // TODO: unity, 挂左侧刷怪区的grid，grid先设置3*3（效果应为不随机/不移动）
 
+    private List<MonsterObj> _availableMonsters = new List<MonsterObj>();
     public String availableMonstersFilePath;// TODO: unity, 写Csv文件的完整路径
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    public float size = 5.0f;
 
     // TODO: unity, 按钮点击事件
     // 预期行为：随机从_availableMonsters中选取一个monster，实例化到左侧刷怪区的grid中
-    public void Test_OnClick(){
+    public void Test_OnClick()
+    {
         LoadAvaliableMonsters(availableMonstersFilePath);
         SpawnNextMonster();
     }
@@ -50,8 +47,9 @@ public class SpawnManager : MonoBehaviour
 
         // update all fields of the GameObject
         var image = newMonster.GetComponent<UnityEngine.UI.Image>();
-        var sprite = LoadSpriteFromFile(monsterObj._spritePath);
 
+        var sprite = LoadSpriteFromFile(monsterObj._spritePath);
+        Debug.Log("sprite: " + sprite);
         var monster = newMonster.GetComponent<Monster>();
         if (monster != null)
         {
@@ -59,28 +57,41 @@ public class SpawnManager : MonoBehaviour
         }
 
         // set parents
-        newMonster.transform.SetParent(SpawnGrid);
+        int spawn_point_idx = UnityEngine.Random.Range((int)0, (int)(this._spawnPoints.Count()));
+        Transform spawn_point = this._spawnPoints[spawn_point_idx];
+        newMonster.transform.SetParent(spawn_point);
         return newMonster;
     }
 
     private Sprite LoadSpriteFromFile(string filePath)
     {
-
+        string fullPath = Path.Combine(Application.dataPath, filePath);
+        Debug.Log("Application.dataPath: " + Application.dataPath);
+        Debug.Log("fullPath: " + fullPath);
         // Read the file data
         byte[] fileData = File.ReadAllBytes(filePath);
 
         // Create a new Texture2D
-        Texture2D texture = new Texture2D(2, 2); // Initialize with dummy width/height
+        Texture2D texture = new Texture2D(213, 213); // Initialize with dummy width/height
 
 
-        // Create a new Sprite from the texture
-        Sprite sprite = Sprite.Create(
-            texture,
-            new Rect(0, 0, texture.width, texture.height),
-            new Vector2(0.5f, 0.5f)
-        );
+        // Load the texture with the file data
+        if (texture.LoadImage(fileData))
+        {
+            // Create a new Sprite from the texture
+            Sprite sprite = Sprite.Create(
+                texture,
+                new Rect(0, 0, texture.width, texture.height),
+                new Vector2(0.5f, 0.5f) // Set pivot to center
+            );
 
-        return sprite;
+            return sprite;
+        }
+        else
+        {
+            Debug.LogError("Failed to load sprite from file: " + fullPath);
+            return null;
+        }
     }
 
     private void LoadAvaliableMonsters(string filePath)
@@ -111,6 +122,8 @@ public class SpawnManager : MonoBehaviour
                 var colors = ParseColors(colorsStr);
                 var score = csv.GetField<int>(2);
                 var spriteRenderer = csv.GetField<string>(3);
+
+                Debug.Log("Monster: " + monsterName + " Colors: " + colorsStr + " Score: " + score + " Sprite: " + spriteRenderer);
 
                 var monsterObj = new MonsterObj
                 {
@@ -153,11 +166,4 @@ public class SpawnManager : MonoBehaviour
 
         return colors.ToArray();
     }
-}
-public class MonsterObj
-{
-    public String _monsterName { get; set; }
-    public Color[] _colors { get; set; }
-    public int _score { get; set; }
-    public String _spritePath { get; set; }
 }
