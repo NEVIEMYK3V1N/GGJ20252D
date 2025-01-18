@@ -71,8 +71,8 @@ public class SpawnManager : MonoBehaviour
             int amount_to_spawn = -1;
             for (int i = 0; i < _spawnLogics.Count; i++)
             {
-                if (this._gameManager._score >= this._spawnLogics[i]._startPoint &&
-                    this._gameManager._score <= this._spawnLogics[i]._endPoint)
+                if (this._gameManager.getScore() >= this._spawnLogics[i]._startPoint &&
+                    this._gameManager.getScore() <= this._spawnLogics[i]._endPoint)
                 {
                     amount_to_spawn = this._spawnLogics[i]._amountSpawning;
                     break;

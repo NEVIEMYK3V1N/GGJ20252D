@@ -26,25 +26,28 @@ public enum SceneType
     End
 }
 
-
-
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] public SceneManager _sceneManager;
     [SerializeField] public SpawnManager _spawnManager;
 
     // Static property for cross-scene score sharing
-    public int _score {get; set;}
+    private int _score;
 
     public void addScore(int score)
     {
         this._score += score;
     }
 
+    public int getScore()
+    {
+        return this._score;
+    }
+
     public void startGame()
     {
         Debug.Log("Game Started");
-        // TODO
+        SceneManager.LoadScene(Enum.GetName(typeof(SceneType), SceneType.Start));
+        this._spawnManager.startSpawning();
     }
 
     public void endGame()
@@ -52,14 +55,5 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Ended");
         SceneManager.LoadScene(Enum.GetName(typeof(SceneType), SceneType.End));
     }
-
-    // TODO: unity 建一个新场景，期望点击按钮后，跳转到新场景，且新场景显示当前分数5
-    public void Test_OnClick()
-    {
-        this._score = 5;
-        endGame();
-    }
-
 }
-
 

@@ -55,6 +55,7 @@ public class Gun : MonoBehaviour
         if (has_monster)
         {
             int score = this._monsterManager.DestroyMonster(this._colors);
+            //this._gameManager.addScore(score);
             this._gameManager.addScore(score);
         }
         
