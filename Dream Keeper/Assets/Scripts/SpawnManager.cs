@@ -8,6 +8,8 @@ using System.Text;
 using System.IO;
 using System;
 using System.Linq;
+using UnityEditor;
+using Unity.VisualScripting;
 
 public class MonsterObj
 {
@@ -27,27 +29,37 @@ public class SpawnConfigObj
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField] public GameManager _gameManager;
+    [SerializeField] public MonsterManager _monsterManager;
+
     [SerializeField] public GameObject _monsterPrefabs; // TODO: unity,
 
     [SerializeField] public Transform[] _spawnPoints;
 
-    [SerializeField] public String _availableMonstersFilePath;
-    [SerializeField] public String _spawnLogicFilePath;
+    [SerializeField] public string _availableMonstersFilePath;
+    [SerializeField] public string _spawnLogicFilePath;
 
     [SerializeField] public float _spawnCd = 1;
 
-    
 
     private List<SpawnConfigObj> _spawnLogics = new List<SpawnConfigObj>();
     private List<MonsterObj> _availableMonsters = new List<MonsterObj>();
 
     private bool _isSpawning = false;
     public float size = 5.0f;
+
+    private string _root_path = Environment.CurrentDirectory;
     
 
     // load config files
     public void Start()
     {
+        this._root_path = Environment.CurrentDirectory;
+        this._availableMonstersFilePath = this._root_path + _availableMonstersFilePath;
+        this._spawnLogicFilePath = this._root_path + _spawnLogicFilePath;
+
+        Debug.Log(_availableMonstersFilePath);
+        Debug.Log(_spawnLogicFilePath);
+
         LoadAvaliableMonsters(_availableMonstersFilePath);
         loadSpawnLogic(_spawnLogicFilePath);
     }
@@ -90,6 +102,10 @@ public class SpawnManager : MonoBehaviour
 
             for (int i = 0; i < amount_to_spawn; i++)
             {
+                if (!_isSpawning)
+                {
+                    break;
+                }
                 SpawnNextMonster();
             }
         }
@@ -116,10 +132,12 @@ public class SpawnManager : MonoBehaviour
         // set parents
         int spawn_point_idx = UnityEngine.Random.Range((int)0, (int)(this._spawnPoints.Count()));
         Transform spawn_point = this._spawnPoints[spawn_point_idx];
-        newMonster.transform.SetParent(spawn_point);
+        newMonster.transform.position = spawn_point.position;
+
+        this._monsterManager.AddMonster(newMonster);
+
         return newMonster;
     }
-
 
 
 
@@ -129,8 +147,8 @@ public class SpawnManager : MonoBehaviour
     private Sprite LoadSpriteFromFile(string filePath)
     {
         string fullPath = Path.Combine(Application.dataPath, filePath);
-        Debug.Log("Application.dataPath: " + Application.dataPath);
-        Debug.Log("fullPath: " + fullPath);
+        //Debug.Log("Application.dataPath: " + Application.dataPath);
+        //Debug.Log("fullPath: " + fullPath);
         // Read the file data
         byte[] fileData = File.ReadAllBytes(filePath);
 
@@ -220,14 +238,14 @@ public class SpawnManager : MonoBehaviour
                 var score = csv.GetField<int>(2);
                 var spriteRenderer = csv.GetField<string>(3);
 
-                Debug.Log("Monster: " + monsterName + " Colors: " + colorsStr + " Score: " + score + " Sprite: " + spriteRenderer);
+                //Debug.Log("Monster: " + monsterName + " Colors: " + colorsStr + " Score: " + score + " Sprite: " + spriteRenderer);
 
                 var monsterObj = new MonsterObj
                 {
                     _monsterName = monsterName,
                     _colors = colors,
                     _score = score,
-                    _spritePath = spriteRenderer
+                    _spritePath = this._root_path + spriteRenderer
                 };
 
                 _availableMonsters.Add(monsterObj);

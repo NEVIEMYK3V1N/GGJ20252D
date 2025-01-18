@@ -17,11 +17,15 @@ public class Monster : MonoBehaviour
 
     public GameObject _gameManager; // TODO: unity, 挂在gamemanager上
 
+    public float _speed = 0.02f;
+    public float _moveCd = 0.02f;
+
     void Start()
     {
         startTime = Time.time; // 记录开始时间
         Debug.Log("Monster " + _monsterName + " has been created");
         StartCoroutine(CheckSurvival()); // 启动协程来检查生存周期
+        StartCoroutine(randomMove());
     }
 
 
@@ -56,6 +60,23 @@ public class Monster : MonoBehaviour
         if (gameManager != null)
         {
             gameManager.endGame();
+        }
+    }
+
+
+
+    public IEnumerator randomMove()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(this._moveCd);
+
+            float dx = UnityEngine.Random.Range(-1, 2) * this._speed;
+            float dy = UnityEngine.Random.Range(-1, 2) * this._speed;
+
+            Vector3 moveDelta = new Vector3(dx, dy, 0);
+
+            this.gameObject.transform.Translate(moveDelta);
         }
     }
 }

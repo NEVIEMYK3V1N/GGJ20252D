@@ -43,4 +43,17 @@ public class MonsterManager : MonoBehaviour
         int hash = combinedColorString.GetHashCode();
         return hash;
     }
+
+    public void ResetManager()
+    {
+        foreach(var pair in this.monsterQueues)
+        {
+            foreach (GameObject monster in pair.Value)
+            {
+                Destroy(monster);
+            }
+        }
+
+        this.monsterQueues = new Dictionary<int, Queue<GameObject>>();
+    }
 }
