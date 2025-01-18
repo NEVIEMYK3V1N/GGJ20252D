@@ -17,7 +17,7 @@ public class Potion : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("clicked potion: " + this._color.ToString());
+        //Debug.Log("clicked potion: " + this._color.ToString());
 
         if (this._isReloading)
         {

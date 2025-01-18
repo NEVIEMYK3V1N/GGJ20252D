@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class StartGameButton : MonoBehaviour
+public class SwitchSceneButton : MonoBehaviour
 {
     [SerializeField] GameManager _gameManager;
     [SerializeField] SceneType _sceneTo;

@@ -15,7 +15,7 @@ public class Monster : MonoBehaviour
 
     private float startTime;
 
-    public GameObject _gameManager; // TODO: unity, 挂在gamemanager上
+    //public GameObject _gameManager; // TODO: unity, 挂在gamemanager上
 
     public float _speed = 0.02f;
     public float _moveCd = 0.02f;
@@ -23,7 +23,8 @@ public class Monster : MonoBehaviour
     void Start()
     {
         startTime = Time.time; // 记录开始时间
-        Debug.Log("Monster " + _monsterName + " has been created");
+        //Debug.Log("Monster " + _monsterName + " has been created");
+
         StartCoroutine(CheckSurvival()); // 启动协程来检查生存周期
         StartCoroutine(randomMove());
     }

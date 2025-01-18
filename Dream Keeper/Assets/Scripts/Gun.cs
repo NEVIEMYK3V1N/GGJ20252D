@@ -49,11 +49,12 @@ public class Gun : MonoBehaviour
 
     public void shoot()
     {
-        Debug.Log("Shoot");
+        Debug.Log("Shoot: " + this._monsterManager.GetEliminationCondition(this._colors));
 
         bool has_monster = this._monsterManager.HasMonster(this._colors);
         if (has_monster)
         {
+            Debug.Log("gun has monster");
             int score = this._monsterManager.DestroyMonster(this._colors);
             //this._gameManager.addScore(score);
             this._gameManager.addScore(score);

@@ -51,7 +51,8 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log("Game Started");
-        //SceneManager.LoadScene(Enum.GetName(typeof(SceneType), SceneType.Start));
+
+        this._score = 0;
         this._spawnManager.startSpawning();
         this._gameState = SceneType.Game;
     }
@@ -64,12 +65,15 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log("Game Ended");
+
         this._gameState = SceneType.End;
         this._spawnManager.stopSpawning();
         this._spawnManager._monsterManager.ResetManager();
 
-        //SceneManager.LoadScene(Enum.GetName(typeof(SceneType), SceneType.End));
+        // change scene to end
+        SwitchSceneTo.switchSceneTo(SceneType.Game, SceneType.End);
     }
+
 
     public void toStartMenu()
     {

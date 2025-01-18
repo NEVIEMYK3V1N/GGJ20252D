@@ -17,10 +17,14 @@ public class MonsterManager : MonoBehaviour
             monsterQueues.Add(hash, new Queue<GameObject>());
         }
         monsterQueues[hash].Enqueue(monster);
+
+        //Debug.Log("try adding monster: " + monster.GetComponent<Monster>()._colors);
     }
 
     public bool HasMonster(Color[] colors)
     {
+        //debug_printMonsters();
+
         var hash = GetEliminationCondition(colors);
         return monsterQueues.ContainsKey(hash) && monsterQueues[hash].Count > 0;
     }
@@ -36,8 +40,10 @@ public class MonsterManager : MonoBehaviour
         return score;
     }
 
-    private int GetEliminationCondition(Color[] colors)
+    //private
+    public int GetEliminationCondition(Color[] colors)
     {
+        colors = colors.Where(color => color != Color.EMPTY).ToArray();
         var colorStrings = colors.ToList().Select(color => color.ToString()).OrderBy(colorStr => colorStr).ToArray();
         string combinedColorString = string.Join(",", colorStrings);
         int hash = combinedColorString.GetHashCode();
@@ -55,5 +61,29 @@ public class MonsterManager : MonoBehaviour
         }
 
         this.monsterQueues = new Dictionary<int, Queue<GameObject>>();
+    }
+
+
+
+    private void debug_printMonsters()
+    {
+        string str = "";
+        foreach (var pair in this.monsterQueues)
+        {
+            str += pair.Key.ToString() + ": ";
+            str += "\n";
+
+            foreach (GameObject monster in pair.Value)
+            {
+                for (int j = 0; j < monster.GetComponent<Monster>()._colors.Count(); j++)
+                {
+                    str += monster.GetComponent<Monster>()._colors[j] + ", ";
+                }
+
+                str += "\n";
+            }
+        }
+
+        Debug.Log(str);
     }
 }

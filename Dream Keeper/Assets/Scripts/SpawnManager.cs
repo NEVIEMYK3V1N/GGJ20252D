@@ -57,8 +57,8 @@ public class SpawnManager : MonoBehaviour
         this._availableMonstersFilePath = this._root_path + _availableMonstersFilePath;
         this._spawnLogicFilePath = this._root_path + _spawnLogicFilePath;
 
-        Debug.Log(_availableMonstersFilePath);
-        Debug.Log(_spawnLogicFilePath);
+        // Debug.Log(_availableMonstersFilePath);
+        // Debug.Log(_spawnLogicFilePath);
 
         LoadAvaliableMonsters(_availableMonstersFilePath);
         loadSpawnLogic(_spawnLogicFilePath);
