@@ -27,8 +27,12 @@ public enum SceneType
 }
 
 
+
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] public SceneManager _sceneManager;
+    [SerializeField] public SpawnManager _spawnManager;
+
     // Static property for cross-scene score sharing
     public int _score {get; set;}
 
@@ -56,50 +60,6 @@ public class GameManager : MonoBehaviour
         endGame();
     }
 
-
-    private void loadSpawnLogic(string filePath)
-    {
-        var configuration = new CsvConfiguration(CultureInfo.InvariantCulture)
-        {
-            Encoding = Encoding.UTF8,
-            Delimiter = ",",
-            HeaderValidated = null,
-            MissingFieldFound = null,
-            BadDataFound = null,
-            TrimOptions = TrimOptions.Trim,
-            Mode = CsvMode.RFC4180,
-
-        };
-
-        // "rg" -> the monster should be destroyed by red + green bubble
-        // monsterName, colors, score, spriteRenderer
-        // 1,r,1,/Asserts/Images/Monster1.png
-        // 2,rg,2,/Asserts/Images/Monster2.png
-        using (var reader = File.OpenText(filePath))
-        using (var csv = new CsvReader(reader, configuration))
-        {
-            while (csv.Read())
-            {
-                var startPoints = csv.GetField<string>(0);
-                var endPoints = csv.GetField<string>(1);
-                //var colors = ParseColors(colorsStr);
-                //var score = csv.GetField<int>(2);
-                //var spriteRenderer = csv.GetField<string>(3);
-
-                //Debug.Log("Monster: " + monsterName + " Colors: " + colorsStr + " Score: " + score + " Sprite: " + spriteRenderer);
-
-                //var monsterObj = new MonsterObj
-                //{
-                //    _monsterName = monsterName,
-                //    _colors = colors,
-                //    _score = score,
-                //    _spritePath = spriteRenderer
-                //};
-
-                //_availableMonsters.Add(monsterObj);
-            }
-        }
-    }
 }
 
 

@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 744b879ddc92f154a90916c6e2be8689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawnManager: {fileID: 1506908247}
 --- !u!1 &394154290
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,7 +367,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd72d17258bf2ae4eacc90165fdc5fb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testMonster: {fileID: 0}
 --- !u!1 &1130206310
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,9 +534,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530e4de2fda3f3645aa7ea61434957d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameManager: {fileID: 3043887}
   _monsterPrefabs: {fileID: 0}
   _spawnPoints: []
-  availableMonstersFilePath: 
+  _availableMonstersFilePath: 
+  _spawnLogicFilePath: 
+  _spawnCd: 1
   size: 5
 --- !u!1 &1550853116
 GameObject:

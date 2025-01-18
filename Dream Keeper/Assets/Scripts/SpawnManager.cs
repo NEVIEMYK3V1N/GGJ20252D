@@ -17,29 +17,82 @@ public class MonsterObj
     public String _spritePath { get; set; }
 }
 
+public class SpawnConfigObj
+{
+    public int _startPoint = 0;
+    public int _endPoint = 0;
+    public int _amountSpawning = 0;
+}
+
 public class SpawnManager : MonoBehaviour
 {
-
+    [SerializeField] public GameManager _gameManager;
     [SerializeField] public GameObject _monsterPrefabs; // TODO: unity,
 
     [SerializeField] public Transform[] _spawnPoints;
 
+    [SerializeField] public String _availableMonstersFilePath;
+    [SerializeField] public String _spawnLogicFilePath;
 
-    private List<MonsterObj> _availableMonsters = new List<MonsterObj>();
-    public String availableMonstersFilePath;// TODO: unity, 写Csv文件的完整路径
-
-    public float size = 5.0f;
-
+    [SerializeField] public float _spawnCd = 1;
 
     
 
+    private List<SpawnConfigObj> _spawnLogics = new List<SpawnConfigObj>();
+    private List<MonsterObj> _availableMonsters = new List<MonsterObj>();
 
-    // TODO: unity, 按钮点击事件
-    // 预期行为：随机从_availableMonsters中选取一个monster，实例化到左侧刷怪区的grid中
-    public void Test_OnClick()
+    private bool _isSpawning = false;
+    public float size = 5.0f;
+    
+
+    // load config files
+    public void Start()
     {
-        LoadAvaliableMonsters(availableMonstersFilePath);
-        SpawnNextMonster();
+        LoadAvaliableMonsters(_availableMonstersFilePath);
+        loadSpawnLogic(_spawnLogicFilePath);
+    }
+
+    public void startSpawning()
+    {
+        this._isSpawning = true;
+        StartCoroutine(continuousSpawnMonsters());
+    }
+
+    public void stopSpawning()
+    {
+        this._isSpawning = false;
+    }
+
+    private IEnumerator continuousSpawnMonsters()
+    {
+        while (_isSpawning)
+        {
+            yield return new WaitForSeconds(_spawnCd); // 等待timer秒
+            int amount_to_spawn = -1;
+            for (int i = 0; i < _spawnLogics.Count; i++)
+            {
+                if (this._gameManager._score >= this._spawnLogics[i]._startPoint &&
+                    this._gameManager._score <= this._spawnLogics[i]._endPoint)
+                {
+                    amount_to_spawn = this._spawnLogics[i]._amountSpawning;
+                    break;
+                }
+            }
+
+            if (amount_to_spawn == -1)
+            {
+                amount_to_spawn = this._spawnLogics[this._spawnLogics.Count - 1]._amountSpawning;
+            }
+            if (amount_to_spawn <= 0)
+            {
+                amount_to_spawn = 1;
+            }
+
+            for (int i = 0; i < amount_to_spawn; i++)
+            {
+                SpawnNextMonster();
+            }
+        }
     }
 
     public GameObject SpawnNextMonster()
@@ -66,6 +119,12 @@ public class SpawnManager : MonoBehaviour
         newMonster.transform.SetParent(spawn_point);
         return newMonster;
     }
+
+
+
+
+
+
 
     private Sprite LoadSpriteFromFile(string filePath)
     {
@@ -97,6 +156,40 @@ public class SpawnManager : MonoBehaviour
             return null;
         }
     }
+
+    private Color[] ParseColors(string colorsStr)
+    {
+        List<Color> colors = new List<Color>();
+
+        foreach (char colorChar in colorsStr)
+        {
+            switch (colorChar)
+            {
+                case 'r':
+                    colors.Add(Color.Red);
+                    break;
+                case 'g':
+                    colors.Add(Color.Green);
+                    break;
+                case 'b':
+                    colors.Add(Color.Blue);
+                    break;
+                case 'y':
+                    colors.Add(Color.Yellow);
+                    break;
+                default:
+                    Debug.LogWarning("Unknown color character: " + colorChar);
+                    break;
+            }
+        }
+
+        return colors.ToArray();
+    }
+
+
+
+
+
 
     private void LoadAvaliableMonsters(string filePath)
     {
@@ -142,32 +235,39 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    private Color[] ParseColors(string colorsStr)
+    private void loadSpawnLogic(string filePath)
     {
-        List<Color> colors = new List<Color>();
-
-        foreach (char colorChar in colorsStr)
+        var configuration = new CsvConfiguration(CultureInfo.InvariantCulture)
         {
-            switch (colorChar)
+            Encoding = Encoding.UTF8,
+            Delimiter = ",",
+            HeaderValidated = null,
+            MissingFieldFound = null,
+            BadDataFound = null,
+            TrimOptions = TrimOptions.Trim,
+            Mode = CsvMode.RFC4180,
+
+        };
+
+        // startScore, endScore, numberSpawning
+        using (var reader = File.OpenText(filePath))
+        using (var csv = new CsvReader(reader, configuration))
+        {
+            while (csv.Read())
             {
-                case 'r':
-                    colors.Add(Color.Red);
-                    break;
-                case 'g':
-                    colors.Add(Color.Green);
-                    break;
-                case 'b':
-                    colors.Add(Color.Blue);
-                    break;
-                case 'y':
-                    colors.Add(Color.Yellow);
-                    break;
-                default:
-                    Debug.LogWarning("Unknown color character: " + colorChar);
-                    break;
+                int startPoints = Int32.Parse(csv.GetField<string>(0));
+                int endPoints = Int32.Parse(csv.GetField<string>(1));
+                int amountSpawning = Int32.Parse(csv.GetField<string>(2));
+
+                SpawnConfigObj spawnConfigObj = new SpawnConfigObj
+                {
+                    _startPoint = startPoints,
+                    _endPoint = endPoints,
+                    _amountSpawning = amountSpawning
+                };
+
+                this._spawnLogics.Add(spawnConfigObj);
             }
         }
-
-        return colors.ToArray();
     }
 }
