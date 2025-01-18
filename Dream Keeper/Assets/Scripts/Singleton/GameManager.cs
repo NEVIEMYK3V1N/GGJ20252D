@@ -48,72 +48,63 @@ public class GameManager : MonoBehaviour
 
     public void addScore(int score)
     {
-        this._score += score;
+        GameManager.Instance._score += score;
     }
 
     public int getScore()
     {
-        return this._score;
+        return GameManager.Instance._score;
     }
 
 
     public void setGameState(SceneType sceneTo)
     {
-        this._gameState = sceneTo;
+        GameManager.Instance._gameState = sceneTo;
         //SceneManager.UnloadSceneAsync(Enum.GetName(typeof(SceneType), sceneFrom));
         SceneManager.LoadScene(Enum.GetName(typeof(SceneType), sceneTo));
 
         if (sceneTo == SceneType.Start)
         {
-            this.toStartMenu();
+            GameManager.Instance.loadStartMenu();
         }
         else if (sceneTo == SceneType.Game)
         {
-            this.startGame();
+            GameManager.Instance.loadStartGame();
         }
         else if (sceneTo == SceneType.End)
         {
-            this.endGame();
+            //Debug.Log("load end game");
+            GameManager.Instance.loadEndGame();
         }
     }
 
-
+    
 
     public void startGame()
     {
-        if (this._gameState != SceneType.Start)
-        {
-            return;
-        }
-
         Debug.Log("Game Started");
 
-        this._score = 0;
+        GameManager.Instance._score = 0;
         SpawnManager.Instance.startSpawning();
-        this._gameState = SceneType.Game;
+        GameManager.Instance._gameState = SceneType.Game;
     }
 
-    public void endGame()
+    public void loadStartGame()
     {
-        if (this._gameState != SceneType.Game)
-        {
-            return;
-        }
+        
+    }
 
+    public void loadEndGame()
+    {
         Debug.Log("Game Ended");
 
-        this._gameState = SceneType.End;
+        GameManager.Instance._gameState = SceneType.End;
         SpawnManager.Instance.stopSpawning();
         MonsterManager.Instance.ResetManager();
     }
 
-    public void toStartMenu()
+    public void loadStartMenu()
     {
-        if (this._gameState != SceneType.End)
-        {
-            return;
-        }
-
         Debug.Log("To Start Menu");
     }
 }

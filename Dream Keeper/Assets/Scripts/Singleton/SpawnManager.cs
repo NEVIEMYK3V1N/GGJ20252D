@@ -45,7 +45,6 @@ public class SpawnManager : MonoBehaviour
     private List<MonsterObj> _availableMonsters = new List<MonsterObj>();
 
     private bool _isSpawning = false;
-    public float size = 5.0f;
 
     private string _root_path = Environment.CurrentDirectory;
 
@@ -63,9 +62,9 @@ public class SpawnManager : MonoBehaviour
     // load config files
     public void Start()
     {
-        this._root_path = Environment.CurrentDirectory;
-        this._availableMonstersFilePath = this._root_path + _availableMonstersFilePath;
-        this._spawnLogicFilePath = this._root_path + _spawnLogicFilePath;
+        SpawnManager.Instance._root_path = Environment.CurrentDirectory;
+        SpawnManager.Instance._availableMonstersFilePath = SpawnManager.Instance._root_path + _availableMonstersFilePath;
+        SpawnManager.Instance._spawnLogicFilePath = SpawnManager.Instance._root_path + _spawnLogicFilePath;
 
         // Debug.Log(_availableMonstersFilePath);
         // Debug.Log(_spawnLogicFilePath);
@@ -76,34 +75,37 @@ public class SpawnManager : MonoBehaviour
 
     public void startSpawning()
     {
-        this._isSpawning = true;
+        SpawnManager.Instance._isSpawning = true;
         StartCoroutine(continuousSpawnMonsters());
     }
 
     public void stopSpawning()
     {
-        this._isSpawning = false;
+        // Debug.Log("stopped spawning");
+        SpawnManager.Instance._isSpawning = false;
     }
 
     private IEnumerator continuousSpawnMonsters()
     {
-        while (_isSpawning)
+        while (SpawnManager.Instance._isSpawning)
         {
+            //Debug.Log("spawnning");
+
             yield return new WaitForSeconds(_spawnCd); // 等待timer秒
             int amount_to_spawn = -1;
             for (int i = 0; i < _spawnLogics.Count; i++)
             {
-                if (GameManager.Instance.getScore() >= this._spawnLogics[i]._startPoint &&
-                    GameManager.Instance.getScore() <= this._spawnLogics[i]._endPoint)
+                if (GameManager.Instance.getScore() >= SpawnManager.Instance._spawnLogics[i]._startPoint &&
+                    GameManager.Instance.getScore() <= SpawnManager.Instance._spawnLogics[i]._endPoint)
                 {
-                    amount_to_spawn = this._spawnLogics[i]._amountSpawning;
+                    amount_to_spawn = SpawnManager.Instance._spawnLogics[i]._amountSpawning;
                     break;
                 }
             }
 
             if (amount_to_spawn == -1)
             {
-                amount_to_spawn = this._spawnLogics[this._spawnLogics.Count - 1]._amountSpawning;
+                amount_to_spawn = SpawnManager.Instance._spawnLogics[SpawnManager.Instance._spawnLogics.Count - 1]._amountSpawning;
             }
             if (amount_to_spawn <= 0)
             {
@@ -132,7 +134,7 @@ public class SpawnManager : MonoBehaviour
         var image = newMonster.GetComponent<UnityEngine.UI.Image>();
 
         var sprite = LoadSpriteFromFile(monsterObj._spritePath);
-        Debug.Log("sprite: " + sprite);
+        //Debug.Log("sprite: " + sprite);
         var monster = newMonster.GetComponent<Monster>();
         if (monster != null)
         {
@@ -140,8 +142,8 @@ public class SpawnManager : MonoBehaviour
         }
 
         // set parents
-        int spawn_point_idx = UnityEngine.Random.Range((int)0, (int)(this._spawnPoints.Count()));
-        Transform spawn_point = this._spawnPoints[spawn_point_idx];
+        int spawn_point_idx = UnityEngine.Random.Range((int)0, (int)(SpawnManager.Instance._spawnPoints.Count()));
+        Transform spawn_point = SpawnManager.Instance._spawnPoints[spawn_point_idx];
         newMonster.transform.position = spawn_point.position;
 
         MonsterManager.Instance.AddMonster(newMonster);
@@ -255,7 +257,7 @@ public class SpawnManager : MonoBehaviour
                     _monsterName = monsterName,
                     _colors = colors,
                     _score = score,
-                    _spritePath = this._root_path + spriteRenderer
+                    _spritePath = SpawnManager.Instance._root_path + spriteRenderer
                 };
 
                 _availableMonsters.Add(monsterObj);
@@ -294,7 +296,7 @@ public class SpawnManager : MonoBehaviour
                     _amountSpawning = amountSpawning
                 };
 
-                this._spawnLogics.Add(spawnConfigObj);
+                SpawnManager.Instance._spawnLogics.Add(spawnConfigObj);
             }
         }
     }

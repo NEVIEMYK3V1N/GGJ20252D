@@ -14,6 +14,8 @@ public class TutorialMonster : MonoBehaviour
     // Start is called before the first frame update
     private void OnDestroy()
     {
-        GameManager.Instance.setGameState(SceneType.Start);
+        //Debug.Log("Tutorial monster destroyed");
+
+        GameManager.Instance.startGame();
     }
 }

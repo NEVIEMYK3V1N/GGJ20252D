@@ -32,29 +32,19 @@ public class Gun : MonoBehaviour
         this._colors[_currentCapacity] = color;
         this._currentCapacity++;
 
-        helper_printColors();
+        //debug_printColors();
 
         return true;
     }
 
-    private void helper_printColors()
-    {
-        string colors = "";
-        for (int i = 0; i < MAX_CAPACITY; i++)
-        {
-            colors += _colors[i] + ", ";
-        }
-        Debug.Log(colors);
-    }
-
     public void shoot()
     {
-        Debug.Log("Shoot: " + MonsterManager.Instance.GetEliminationCondition(this._colors));
+        //Debug.Log("Shoot: " + MonsterManager.Instance.GetEliminationCondition(this._colors));
 
         bool has_monster = MonsterManager.Instance.HasMonster(this._colors);
         if (has_monster)
         {
-            Debug.Log("gun has monster");
+            //Debug.Log("gun has monster");
             int score = MonsterManager.Instance.DestroyMonster(this._colors);
             GameManager.Instance.addScore(score);
         }
@@ -71,5 +61,18 @@ public class Gun : MonoBehaviour
         {
             this._colors[i] = Color.EMPTY;
         }
+    }
+
+
+
+
+    private void debug_printColors()
+    {
+        string colors = "";
+        for (int i = 0; i < MAX_CAPACITY; i++)
+        {
+            colors += _colors[i] + ", ";
+        }
+        Debug.Log(colors);
     }
 }

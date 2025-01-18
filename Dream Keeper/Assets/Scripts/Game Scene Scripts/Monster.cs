@@ -53,7 +53,7 @@ public class Monster : MonoBehaviour
 
     public void OnGameOver()
     {
-        Debug.Log("Game Over: Monster " + _monsterName + " has been defeated in time");
+        //Debug.Log("Game Over: Monster " + _monsterName + " has been defeated in time");
 
         GameManager gameManager = FindObjectOfType<GameManager>();
         if (gameManager != null)

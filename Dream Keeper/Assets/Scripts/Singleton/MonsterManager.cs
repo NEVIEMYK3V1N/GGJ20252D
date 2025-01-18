@@ -46,7 +46,7 @@ public class MonsterManager : MonoBehaviour
         var monster = monsterQueues[hash].Dequeue();
         var score = monster.GetComponent<Monster>()._score;
         Destroy(monster);
-        Debug.Log("Destroying monster with color: " + string.Join(",", colors) );
+        //Debug.Log("Destroying monster with color: " + string.Join(",", colors) );
         return score;
     }
 
@@ -62,7 +62,7 @@ public class MonsterManager : MonoBehaviour
 
     public void ResetManager()
     {
-        foreach(var pair in this.monsterQueues)
+        foreach(var pair in MonsterManager.Instance.monsterQueues)
         {
             foreach (GameObject monster in pair.Value)
             {
@@ -70,7 +70,7 @@ public class MonsterManager : MonoBehaviour
             }
         }
 
-        this.monsterQueues = new Dictionary<int, Queue<GameObject>>();
+        MonsterManager.Instance.monsterQueues = new Dictionary<int, Queue<GameObject>>();
     }
 
 
@@ -78,7 +78,7 @@ public class MonsterManager : MonoBehaviour
     private void debug_printMonsters()
     {
         string str = "";
-        foreach (var pair in this.monsterQueues)
+        foreach (var pair in MonsterManager.Instance.monsterQueues)
         {
             str += pair.Key.ToString() + ": ";
             str += "\n";
