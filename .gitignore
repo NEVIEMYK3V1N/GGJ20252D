@@ -1,0 +1,65 @@
+# Ignore Unity temporary files
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+
+# Ignore Unity asset caches
+/Assets/AssetStoreTools*
+/Assets/Plugins/Editor/JetBrains*
+
+# Ignore auto-generated files
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+
+# Ignore OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Ignore Visual Studio temporary files
+.vs/
+.vscode/
+
+# Ignore other project files
+/[Pp]ackages/
+/[Pp]rojectSettings/ProjectVersion.txt
+/[Pp]rojectSettings/EditorBuildSettings.asset
+/[Pp]rojectSettings/EditorSettings.asset
+/[Pp]rojectSettings/GraphicsSettings.asset
+/[Pp]rojectSettings/InputManager.asset
+/[Pp]rojectSettings/NavMeshAreas.asset
+/[Pp]rojectSettings/Physics2DSettings.asset
+/[Pp]rojectSettings/QualitySettings.asset
+/[Pp]rojectSettings/TagManager.asset
+/[Pp]rojectSettings/TimeManager.asset
+/[Pp]rojectSettings/AudioManager.asset
+/[Pp]rojectSettings/ClusterInputManager.asset
+/[Pp]rojectSettings/DynamicsManager.asset
+/[Pp]rojectSettings/NetworkManager.asset
+/[Pp]rojectSettings/PhysicsManager.asset
+/[Pp]rojectSettings/PlayerSettings.asset
+/[Pp]rojectSettings/PresetManager.asset
+/[Pp]rojectSettings/SpritePackerSettings.asset
+/[Pp]rojectSettings/XRSettings.asset
+
+# Ignore crash logs
+crashlytics-build.properties
+
+# Ignore custom files
+*.private
+*.secret
