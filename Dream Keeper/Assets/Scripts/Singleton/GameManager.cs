@@ -74,11 +74,13 @@ public class GameManager : MonoBehaviour
         else if (sceneTo == SceneType.End)
         {
             //Debug.Log("load end game");
-            GameManager.Instance.loadEndGame();
+            var bedroomAnim = GameObject.Find("BedroomAnim");
+            bedroomAnim.GetComponent<BedroomAnim>().SwitchAnimation();
+            StartCoroutine(GameManager.Instance.loadEndGame(bedroomAnim.GetComponent<BedroomAnim>().GetAnimationLength()));
         }
     }
 
-    
+
 
     public void startGame()
     {
@@ -91,11 +93,13 @@ public class GameManager : MonoBehaviour
 
     public void loadStartGame()
     {
-        
+
     }
 
-    public void loadEndGame()
+    public IEnumerator loadEndGame(float seconds)
     {
+        Debug.Log("Waiting for " + seconds + " seconds");
+        yield return new WaitForSeconds(seconds);
         Debug.Log("Game Ended");
 
         AudioManager.Instance.play_audio_success();
