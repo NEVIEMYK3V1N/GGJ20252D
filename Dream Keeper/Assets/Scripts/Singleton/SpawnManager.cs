@@ -38,7 +38,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] public string _availableMonstersFilePath;
     [SerializeField] public string _spawnLogicFilePath;
 
-    [SerializeField] public float _spawnCd = 1;
+    [SerializeField] public float _spawnCd = 3;
 
 
     private List<SpawnConfigObj> _spawnLogics = new List<SpawnConfigObj>();
