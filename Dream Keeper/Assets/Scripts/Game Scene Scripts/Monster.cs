@@ -17,12 +17,13 @@ public class Monster : MonoBehaviour
 
     public float _speed = 0.02f;
     public float _moveCd = 0.02f;
+    private Animator animator;
 
     void Start()
     {
         startTime = Time.time; // 记录开始时间
         //Debug.Log("Monster " + _monsterName + " has been created");
-
+    
         StartCoroutine(CheckSurvival()); // 启动协程来检查生存周期
         StartCoroutine(randomMove());
     }
@@ -61,10 +62,25 @@ public class Monster : MonoBehaviour
             GameManager.Instance.setGameState(SceneType.End);
         }
     }
+    public void SwitchAnimation()
+    {
+        animator = GetComponent<Animator>();
+        Debug.Log("Before SwitchAnimation: " + animator.enabled);
+        animator.enabled = true;
+        
+        animator.SetBool("IsExplode", true);
+    }
 
+    public float AnimationSeconds()
+    {
+        var time = animator.GetCurrentAnimatorStateInfo(0).length;
+        Debug.Log("AnimationSeconds: " + time);
+        return time;
+    }
 
     private void OnDestroy()
     {
+        animator.SetBool("IsExplode", true);
         AudioManager.Instance.play_audio_bubble_explode();
     }
 

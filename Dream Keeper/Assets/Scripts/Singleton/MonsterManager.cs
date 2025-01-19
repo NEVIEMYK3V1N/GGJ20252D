@@ -45,10 +45,22 @@ public class MonsterManager : MonoBehaviour
         var hash = GetEliminationCondition(colors);
         var monster = monsterQueues[hash].Dequeue();
         var score = monster.GetComponent<Monster>()._score;
-        Destroy(monster);
+        monster.GetComponent<Monster>().SwitchAnimation();
+        StartCoroutine(DestroyAfterSeconds(monster.GetComponent<Monster>().AnimationSeconds(), monster));
+
         //Debug.Log("Destroying monster with color: " + string.Join(",", colors) );
         return score;
     }
+
+    private IEnumerator DestroyAfterSeconds(float seconds, GameObject monster)
+    {
+        // 等待动画播放完毕
+        yield return new WaitForSeconds(seconds);
+        Debug.Log("Waiting animation finished, destroying " + monster.name);
+        // 销毁对象
+        Destroy(monster);
+    }
+
 
     //private
     public int GetEliminationCondition(Color[] colors)
@@ -62,7 +74,7 @@ public class MonsterManager : MonoBehaviour
 
     public void ResetManager()
     {
-        foreach(var pair in MonsterManager.Instance.monsterQueues)
+        foreach (var pair in MonsterManager.Instance.monsterQueues)
         {
             foreach (GameObject monster in pair.Value)
             {

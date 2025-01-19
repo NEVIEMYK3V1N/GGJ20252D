@@ -61,6 +61,10 @@ PrefabInstance:
       value: TutorialMonster
       objectReference: {fileID: 0}
     - target: {fileID: 6011693359216974917, guid: 66c46b5c1921ba649aae6d0762d37495, type: 3}
+      propertyPath: _spriteRenderer
+      value: 
+      objectReference: {fileID: 3998345206344455867}
+    - target: {fileID: 6011693359216974917, guid: 66c46b5c1921ba649aae6d0762d37495, type: 3}
       propertyPath: _colors.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -75,7 +79,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5688532681383949223, guid: 66c46b5c1921ba649aae6d0762d37495, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6304941837001081270}
+    - targetCorrespondingSourceObject: {fileID: 5688532681383949223, guid: 66c46b5c1921ba649aae6d0762d37495, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3513276029308141366}
   m_SourcePrefab: {fileID: 100100000, guid: 66c46b5c1921ba649aae6d0762d37495, type: 3}
+--- !u!212 &3998345206344455867 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2840045001591572640, guid: 66c46b5c1921ba649aae6d0762d37495, type: 3}
+  m_PrefabInstance: {fileID: 1158872225960517147}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6837764355030150588 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5688532681383949223, guid: 66c46b5c1921ba649aae6d0762d37495, type: 3}
@@ -93,4 +105,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c46aec9dd92798c46b5270adc4108b8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameManager: {fileID: 0}
+--- !u!95 &3513276029308141366
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6837764355030150588}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f2f96ec1cd4be6842a3b1eb7820aa1e7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
