@@ -397,6 +397,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1876389931 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 836805964879975295, guid: 4e57e15e296718d488536a112f3eb490, type: 3}
+  m_PrefabInstance: {fileID: 8152809171729610313}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7722664192856799982
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -510,6 +515,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8832841432352746790, guid: 4e57e15e296718d488536a112f3eb490, type: 3}
+      propertyPath: _gun_fail_audio_clip
+      value: 
+      objectReference: {fileID: 8300000, guid: e043378777555cd488aedab875fbe862, type: 3}
+    - target: {fileID: 8832841432352746790, guid: 4e57e15e296718d488536a112f3eb490, type: 3}
+      propertyPath: _gun_fail_audio_source
+      value: 
+      objectReference: {fileID: 1876389931}
+    - target: {fileID: 8832841432352746790, guid: 4e57e15e296718d488536a112f3eb490, type: 3}
+      propertyPath: _gun_success_audio_clip
+      value: 
+      objectReference: {fileID: 8300000, guid: a047f11af5036e144984bd999f080732, type: 3}
+    - target: {fileID: 8832841432352746790, guid: 4e57e15e296718d488536a112f3eb490, type: 3}
+      propertyPath: _bottle_shake_audio_clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1b395d63592cae2439c2ef268959b599, type: 3}
+    - target: {fileID: 8832841432352746790, guid: 4e57e15e296718d488536a112f3eb490, type: 3}
+      propertyPath: _gun_success_audio_source
+      value: 
+      objectReference: {fileID: 1876389931}
+    - target: {fileID: 8832841432352746790, guid: 4e57e15e296718d488536a112f3eb490, type: 3}
+      propertyPath: _bubble_explode_audio_clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4232c135b47b2a8438d287bcab06859b, type: 3}
+    - target: {fileID: 8832841432352746790, guid: 4e57e15e296718d488536a112f3eb490, type: 3}
+      propertyPath: _bubble_explode_audio_source
+      value: 
+      objectReference: {fileID: 1876389931}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -63,6 +63,11 @@ public class Monster : MonoBehaviour
     }
 
 
+    private void OnDestroy()
+    {
+        AudioManager.Instance.play_audio_bubble_explode();
+    }
+
 
     public IEnumerator randomMove()
     {

@@ -46,11 +46,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bottle_shake_audio_source: {fileID: 836805964879975295}
-  _bottle_shake_audio_clip: {fileID: 8300000, guid: eb42f53c9d31b4640b6b88a3c541b63d, type: 3}
+  _bottle_shake_audio_clip: {fileID: 8300000, guid: 1b395d63592cae2439c2ef268959b599, type: 3}
   _click_audio_source: {fileID: 836805964879975295}
   _click_audio_clip: {fileID: 8300000, guid: 0605d7744f47377418ae2f8b2f8364ca, type: 3}
   _success_audio_source: {fileID: 836805964879975295}
   _success_audio_clip: {fileID: 8300000, guid: cfda6b730c8ad2848bc543391c15dca5, type: 3}
+  _bubble_explode_audio_source: {fileID: 836805964879975295}
+  _bubble_explode_audio_clip: {fileID: 8300000, guid: 4232c135b47b2a8438d287bcab06859b, type: 3}
+  _gun_fail_audio_source: {fileID: 836805964879975295}
+  _gun_fail_audio_clip: {fileID: 8300000, guid: e043378777555cd488aedab875fbe862, type: 3}
+  _gun_success_audio_source: {fileID: 836805964879975295}
+  _gun_success_audio_clip: {fileID: 8300000, guid: a047f11af5036e144984bd999f080732, type: 3}
 --- !u!82 &836805964879975295
 AudioSource:
   m_ObjectHideFlags: 0
@@ -60,7 +66,7 @@ AudioSource:
   m_GameObject: {fileID: 819870083550063309}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 3923670337436522699, guid: d0b68a952fe9f954a8e8c9c788b36e96, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1

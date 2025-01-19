@@ -49,6 +49,16 @@ public class Gun : MonoBehaviour
         //Debug.Log("Shoot: " + MonsterManager.Instance.GetEliminationCondition(this._colors));
 
         bool has_monster = MonsterManager.Instance.HasMonster(this._colors);
+
+        if (has_monster) 
+        {
+            AudioManager.Instance.play_audio_gun_success();
+        }
+        else
+        {
+            AudioManager.Instance.play_audio_gun_fail();
+        }
+
         if (has_monster)
         {
             //Debug.Log("gun has monster");

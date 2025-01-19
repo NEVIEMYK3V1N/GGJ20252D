@@ -76,7 +76,7 @@ public class Potion : MonoBehaviour
 
     private IEnumerator refill()
     {
-        yield return new WaitForSeconds(_refillCd); // �ȴ�timer��
+        yield return new WaitForSeconds(_refillCd); // timer
         this._currentCapacity = MAX_CAPACITY;
         this._isReloading = false;
 
