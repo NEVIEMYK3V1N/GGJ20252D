@@ -394,6 +394,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2130252486780891998, guid: d6397c8615ed1034291c2045b7fb2794, type: 3}
+      propertyPath: _score
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130252486780891998, guid: d6397c8615ed1034291c2045b7fb2794, type: 3}
+      propertyPath: _trophysPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 5257212015257232095, guid: 850e63e395471ef4985d8a7defc575c4, type: 3}
+    - target: {fileID: 2130252486780891998, guid: d6397c8615ed1034291c2045b7fb2794, type: 3}
+      propertyPath: _trophysPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 3145173021338463821, guid: 7df29ebea3fe8e349bfbce55690f50b3, type: 3}
+    - target: {fileID: 2130252486780891998, guid: d6397c8615ed1034291c2045b7fb2794, type: 3}
+      propertyPath: _trophysPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 4373759598715568331, guid: 7cb74a0ead35067468572a5a1ddb4c25, type: 3}
+    - target: {fileID: 2130252486780891998, guid: d6397c8615ed1034291c2045b7fb2794, type: 3}
+      propertyPath: _emptyTrophysPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 5257212015257232095, guid: 368df5e369594d946b69d70a0b3ef941, type: 3}
+    - target: {fileID: 2130252486780891998, guid: d6397c8615ed1034291c2045b7fb2794, type: 3}
+      propertyPath: _emptyTrophysPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 3145173021338463821, guid: b467db6e1ac7eb54eb3b6d5e13a60076, type: 3}
+    - target: {fileID: 2130252486780891998, guid: d6397c8615ed1034291c2045b7fb2794, type: 3}
+      propertyPath: _emptyTrophysPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 4373759598715568331, guid: 7cd4be6631c4eee41bbc68de3a2cc0c7, type: 3}
     - target: {fileID: 2977432417482138598, guid: d6397c8615ed1034291c2045b7fb2794, type: 3}
       propertyPath: m_Name
       value: GameManager

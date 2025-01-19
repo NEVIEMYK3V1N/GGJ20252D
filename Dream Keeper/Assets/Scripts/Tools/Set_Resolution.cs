@@ -8,6 +8,6 @@ public class Set_Resolution : MonoBehaviour
     void Start()
     {
         Screen.fullScreen = false;
-        Screen.SetResolution(1980, 1080, false);
+        Screen.SetResolution(1900, 1080, false);
     }
 }
