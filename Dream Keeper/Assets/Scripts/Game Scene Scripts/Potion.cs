@@ -20,6 +20,9 @@ public class Potion : MonoBehaviour
     private float _refillCd = 1; // second
     private bool _isReloading = false;
 
+    public float shakeDuration = 0.2f; // 晃动持续时间
+    public float shakeMagnitude = 0.01f; // 晃动幅度
+
     private void OnMouseDown()
     {
         //Debug.Log("clicked potion: " + this._color.ToString());
@@ -45,11 +48,35 @@ public class Potion : MonoBehaviour
                 StartCoroutine(refill());
             }
         }
+
+        StartCoroutine(Shake());
+
+    }
+
+    private System.Collections.IEnumerator Shake()
+    {
+        float elapsedTime = 0f;
+        Vector3 originalPosition = this.gameObject.transform.position;
+        while (elapsedTime < shakeDuration)
+        {
+            // 随机生成晃动的偏移量
+            float offsetX = UnityEngine.Random.Range(-shakeMagnitude, shakeMagnitude);
+            float offsetY = UnityEngine.Random.Range(-shakeMagnitude, shakeMagnitude);
+
+            Vector3 moveDelta = new Vector3(offsetX, offsetY, 0);
+            this.gameObject.transform.Translate(moveDelta);
+
+            elapsedTime += Time.deltaTime;
+            yield return null; // 等待下一帧
+        }
+        // 重置位置
+        this.gameObject.transform.position = originalPosition;
+
     }
 
     private IEnumerator refill()
     {
-        yield return new WaitForSeconds(_refillCd); // �ȴ�timer��
+        yield return new WaitForSeconds(_refillCd); // �ȴ�timer��
         this._currentCapacity = MAX_CAPACITY;
         this._isReloading = false;
 
