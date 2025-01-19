@@ -19,6 +19,8 @@ public class Potion : MonoBehaviour
     {
         //Debug.Log("clicked potion: " + this._color.ToString());
 
+        AudioManager.Instance.play_audio_bottle_shake();
+
         if (this._isReloading)
         {
             return;

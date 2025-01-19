@@ -165,5 +165,6 @@ MonoBehaviour:
   _colors: 
   _score: 0
   _spriteRenderer: {fileID: 2840045001591572640}
-  timer: 3
-  _gameManager: {fileID: 0}
+  timer: 5
+  _speed: 0.02
+  _moveCd: 0.02

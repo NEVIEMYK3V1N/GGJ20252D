@@ -98,6 +98,8 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Ended");
 
+        AudioManager.Instance.play_audio_success();
+
         GameManager.Instance._gameState = SceneType.End;
         SpawnManager.Instance.stopSpawning();
         MonsterManager.Instance.ResetManager();

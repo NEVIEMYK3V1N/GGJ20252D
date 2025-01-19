@@ -7,6 +7,7 @@ public class QuitGame : MonoBehaviour
     // Start is called before the first frame update
     private void OnMouseDown()
     {
+        AudioManager.Instance.play_audio_click();
         QuitGame.Quit();
     }
 

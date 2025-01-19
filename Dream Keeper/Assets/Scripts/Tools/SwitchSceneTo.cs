@@ -10,6 +10,7 @@ public class SwitchSceneTo : MonoBehaviour
 
     private void OnMouseDown()
     {
+        AudioManager.Instance.play_audio_click();
         SwitchSceneTo.switchSceneTo(_sceneTo);
     }
 
